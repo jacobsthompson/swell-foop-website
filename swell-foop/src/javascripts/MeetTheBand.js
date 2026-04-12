@@ -6,28 +6,28 @@ import fullGroup from "../assets/band-members/FullGroup.png";
 import sophia from "../assets/band-members/Sophia.png";
 import miranda from "../assets/band-members/Miranda.png";
 import tiena from "../assets/band-members/Tiena.png";
-import {sophiaImages, mirandaImages, tienaImages, groupImages} from "./Images";
+// import {sophiaImages, mirandaImages, tienaImages, groupImages} from "./Images";
 
 
 export default function MeetTheBand(){
     const [selectedMember, setSelectedMember] = useState("");
-    const [selectedImages, setSelectedImages] = useState(groupImages);
+    const [selectedImages, setSelectedImages] = useState(null);
 
-    const selectImages = (member) => {
-        if(member === "sophia"){
-            setSelectedImages(sophiaImages);
-        } else if(member === "miranda"){
-            setSelectedImages(mirandaImages);
-        } else if(member === "tiena"){
-            setSelectedImages(tienaImages);
-        } else {
-            setSelectedImages(groupImages);
-        }
-    }
+    // const selectImages = (member) => {
+    //     if(member === "sophia"){
+    //         setSelectedImages(sophiaImages);
+    //     } else if(member === "miranda"){
+    //         setSelectedImages(mirandaImages);
+    //     } else if(member === "tiena"){
+    //         setSelectedImages(tienaImages);
+    //     } else {
+    //         setSelectedImages(groupImages);
+    //     }
+    // }
 
     const selectMember = (member) => {
         setSelectedMember(member);
-        selectImages(member);
+        // selectImages(member);
         console.log(member);
     }
 
