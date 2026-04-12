@@ -1,7 +1,7 @@
 import "../stylesheets/images.css"
 
 export function ScrollingImages({images}) {
-    const speed = images.length * 10;
+    const speed = images ? images.length * 10 : 60;
 
     if(images){
         return (
