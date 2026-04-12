@@ -1,0 +1,51 @@
+.meet-the-band-wrapper {
+    width: 100%;
+    height: 100%;
+    min-height: fit-content;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.band-pictures{
+    width: 100%;
+    height: fit-content;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-self: flex-end;
+    z-index: 2;
+
+    scale: 0.5;
+    transform-origin: bottom;
+}
+
+.full-band {
+    width: 100%;
+}
+
+.band-image {
+    position: absolute;
+    width: 100%;
+    filter: drop-shadow(0 0 0.5rem black);
+}
+
+.band-members {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    min-height: 100%;
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 1.3fr;
+    z-index: 3;
+    scale: 0.5;
+    transform-origin: bottom;
+
+    /*opacity: 0;*/
+}
+
+.band-member {
+    width: 100%;
+    min-height: 100%;
+    opacity: 50%;
+}
