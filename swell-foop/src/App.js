@@ -1,12 +1,11 @@
+import {useEffect, useRef, useState} from "react";
 import './App.css';
 import Header from "./javascripts/Header";
-import {useEffect, useRef, useState} from "react";
-import MeetTheBand from "./javascripts/MeetTheBand";
-import Music from "./javascripts/Music";
+import MainContent from "./javascripts/MainContent";
 
-function App() {
+export default function App() {
     const headerMax = window.innerHeight;
-    const headerMin = 860/15;
+    const headerMin = 860 * 0.05;
     const [headerHeight, setHeaderHeight] = useState(headerMax);
 
     const containerRef = useRef(null);
@@ -73,7 +72,7 @@ function App() {
                     setHeaderHeight(newHeight);
                 }
             } else {
-                el.scrollTop += deltaY;
+                // el.scrollTop += deltaY;
             }
         };
 
@@ -96,7 +95,7 @@ function App() {
                         setHeaderHeight(newHeight);
                     }
                 } else {
-                    el.scrollTop += v;
+                    // el.scrollTop += v;
                 }
 
                 v *= 0.92;
@@ -120,26 +119,9 @@ function App() {
     }, [headerMin, headerMax]);
 
     return (
-    <div className="App"
-         ref={containerRef}
-    >
+    <div className="App" ref={containerRef}>
         <Header height={headerHeight} minHeight={headerMin} maxHeight={headerMax}/>
-        <div className="main-content" style={{marginTop: headerHeight === headerMin ? headerHeight : 0}}>
-            <div className="content-box">
-                <h1>hey, we're swell foop.</h1>
-                <p>From the release of their debut EP "Don't Spare Me," which has garnered over 300k streams across platforms, to their latest single "Dress Song," which has been included in Spotify's influential "Fresh Finds Indie" playlist, swell foop's rise has been swift and notable. Building on this momentum comes the release of "Dead Weight," a collaboration between the band and co-songwriter Sophia Shen's solo project. It marks an expansion of swell foop's sonic vocabulary and illuminates their musical future, harnessing the band's cathartic studio synthesis to deliver a complex and stirring breakup record.</p>
-                <h1>MEET THE BAND</h1>
-            </div>
-            <div className="content-box">
-                <MeetTheBand/>
-            </div>
-            <div className="content-box">
-                <Music/>
-            </div>
-            <div className="about"></div>
-        </div>
+        <MainContent headerHeight={headerHeight} headerMin={headerMin}/>
     </div>
     );
 }
-
-export default App;

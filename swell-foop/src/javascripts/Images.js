@@ -1,44 +1,85 @@
-// import s1 from "../assets/band-members/Sophia/1.jpg";
-// import s2 from "../assets/band-members/Sophia/2.jpg";
-// import s3 from "../assets/band-members/Sophia/3.jpg";
-// import s4 from "../assets/band-members/Sophia/4.jpg";
-// import s5 from "../assets/band-members/Sophia/5.jpg";
-// import s6 from "../assets/band-members/Sophia/6.jpg";
-// import s7 from "../assets/band-members/Sophia/7.jpg";
-//
-// import m1 from "../assets/band-members/Miranda/1.jpg";
-// import m2 from "../assets/band-members/Miranda/2.jpg";
-// import m3 from "../assets/band-members/Miranda/3.jpg";
-// import m4 from "../assets/band-members/Miranda/4.jpg";
-// import m5 from "../assets/band-members/Miranda/5.jpg";
-// import m6 from "../assets/band-members/Miranda/6.jpg";
-// import m7 from "../assets/band-members/Miranda/7.jpg";
-// import m8 from "../assets/band-members/Miranda/8.jpg";
-//
-// import t1 from "../assets/band-members/Tiena/1.jpg";
-// import t2 from "../assets/band-members/Tiena/2.jpg";
-// import t3 from "../assets/band-members/Tiena/3.jpg";
-// import t4 from "../assets/band-members/Tiena/4.jpg";
-// import t5 from "../assets/band-members/Tiena/5.jpg";
-// import t6 from "../assets/band-members/Tiena/6.jpg";
-// import t7 from "../assets/band-members/Tiena/7.jpg";
-//
-// import g1 from "../assets/band-members/Group/1.jpg";
-// import g2 from "../assets/band-members/Group/2.jpg";
-// import g3 from "../assets/band-members/Group/3.jpg";
-// import g4 from "../assets/band-members/Group/4.jpg";
-// import g5 from "../assets/band-members/Group/5.jpg";
-// import g6 from "../assets/band-members/Group/6.jpg";
-// import g7 from "../assets/band-members/Group/7.jpg";
-// import g8 from "../assets/band-members/Group/8.jpg";
-// import g9 from "../assets/band-members/Group/9.jpg";
-// import g10 from "../assets/band-members/Group/10.jpg";
-// import g11 from "../assets/band-members/Group/11.jpg";
-// import g12 from "../assets/band-members/Group/12.jpg";
-// import g13 from "../assets/band-members/Group/13.jpg";
-// import g14 from "../assets/band-members/Group/14.jpg";
-//
-// export const sophiaImages = [s1, s2, s3, s4, s5, s6, s7];
-// export const mirandaImages = [m1, m2, m3, m4, m5, m6, m7, m8];
-// export const tienaImages = [t1, t2, t3, t4, t5, t6, t7];
-// export const groupImages = [g1, g2, g3, g4, g5, g6, g7, g8, g9, g10, g11, g12, g13, g14];
+import "../stylesheets/images.css"
+import {useEffect, useState} from "react";
+
+export function ScrollingImages({images}) {
+    const speed = images ? images.length * 10 : 60;
+
+    if(images){
+        return (
+            <div className="images-wrapper">
+                <div className="scrolling-images" style={{animation: `image-scroll ${speed}s linear infinite`}}>
+                    {images.map((image, i) => <img className="scrolling-image" key={i} src={image} alt={""}/>)}
+                    {images.map((image, i) => <img className="scrolling-image" key={i} src={image} alt={""}/>)}
+                </div>
+            </div>
+        )
+    }
+}
+
+export function FadingImages({images}){
+    const [index, setIndex] = useState(0);
+    const [prevIndex, setPrevIndex] = useState(null);
+    const [fading, setFading] = useState(false);
+    const fadeDuration = 1000;
+    const autoFadeDuration = 4000;
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            handleImageSwap(getNextIndex(), true);
+        }, autoFadeDuration);
+
+        return () => clearInterval(interval)
+    }, [index, fading]);
+
+    const getNextIndex = () => {
+        if(index + 1 > images.length-1){
+            return 0;
+        } else {
+            return index + 1;
+        }
+    }
+
+    const getPrevIndex = () => {
+        if(index - 1 < 0){
+            return images.length-1;
+        } else {
+            return index - 1;
+        }
+    }
+
+    const handleImageSwap = (newIndex) => {
+        if(fading) return;
+
+        setPrevIndex(index);
+        setIndex(newIndex);
+        setFading(true);
+        setTimeout(() => {
+            setPrevIndex(null);
+            setFading(false);
+        }, fadeDuration);
+    };
+
+    if(!images) return null;
+
+    return(
+        <div className="fading-wrapper">
+            <div className="fading-images">
+                {images.map((src, i) => {
+                    const isActive = i === index;
+                    const isLeaving = i === prevIndex;
+
+                    if(!isActive && !isLeaving) return null;
+                    return(<img key={src} className="fading-image" src={src} alt={""} style={{
+                        opacity: isLeaving ? 0 : 1,
+                        transition: `opacity ${fadeDuration}ms ease`,
+                        zIndex: isLeaving ? 1 : 0
+                    }}/>);
+                })}
+            </div>
+            <div className="index-buttons">
+                <div className="index-button" onClick={() => handleImageSwap(getPrevIndex())}>{"<"}</div>
+                <div className="index-button" onClick={() => handleImageSwap(getNextIndex())}>{">"}</div>
+            </div>
+        </div>
+    );
+}

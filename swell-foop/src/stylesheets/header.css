@@ -6,13 +6,19 @@
     align-items: center;
     overflow: hidden;
 
+    position: relative;
+
+    box-shadow: 0 0 15rem rgba(0,0,0,0.9) inset;
+    z-index: 10;
+}
+
+.header-image {
+    position: absolute;
+    width: 100vw;
     background-image: url("../assets/header-image.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-
-    box-shadow: 0 0 15rem rgba(0,0,0,0.9) inset;
-    z-index: 10;
 }
 
 .header-logo {

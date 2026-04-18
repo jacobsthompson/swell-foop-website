@@ -1,23 +1,31 @@
 .meet-the-band-wrapper {
     width: 100%;
     height: 100%;
-    min-height: fit-content;
     display: flex;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: start;
     position: relative;
+    overflow: hidden;
+}
+
+.band-members {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 2;
+    min-width: 400px;
 }
 
 .band-pictures{
     width: 100%;
-    height: fit-content;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-self: flex-end;
-    z-index: 2;
+    position: absolute;
 
-    scale: 0.5;
-    transform-origin: bottom;
+    display: flex;
+    bottom: 0;
+    z-index: 2;
 }
 
 .full-band {
@@ -28,24 +36,62 @@
     position: absolute;
     width: 100%;
     filter: drop-shadow(0 0 0.5rem black);
+    transition: opacity 0.2s ease-in-out;
 }
 
-.band-members {
+.band-hovers {
     position: absolute;
     bottom: 0;
     width: 100%;
-    min-height: 100%;
+    height: 100%;
     display: grid;
     grid-template-columns: 1.3fr 1fr 1.3fr;
-    z-index: 3;
-    scale: 0.5;
-    transform-origin: bottom;
+    z-index: 5;
 
-    /*opacity: 0;*/
+    opacity: 0;
 }
 
 .band-member {
     width: 100%;
-    min-height: 100%;
+    height: 100%;
     opacity: 50%;
+    align-self: flex-end;
+}
+
+.member-label{
+    position: absolute;
+    width: fit-content;
+    margin: 0 auto 0 auto;
+    inset: auto 0 0 0;
+    padding: 0.5rem;
+
+    text-align: center;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: opacity 0.2s ease-in-out;
+
+    background: rgba(0,0,0,0.5);
+    z-index: 3;
+}
+
+.band-text{
+    width: 80%;
+    padding: 10%;
+    font-size: 1rem;
+    font-weight: normal;
+    height: fit-content;
+}
+
+.scrolling-wrapper{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.4s ease-in-out;
+}
+
+@media screen and (max-width: 500px) {
+    .band-members{
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+    }
 }

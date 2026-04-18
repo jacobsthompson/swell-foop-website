@@ -15,20 +15,21 @@
     <style>
       @font-face {
         font-family: "Basteleur";
-        src: local("Baseteleur-Bold"), url("%PUBLIC_URL%/fonts/Basteleur-Bold.otf") format("otf");
+        src: local("SFBaseteleur-Bold"), url("%PUBLIC_URL%/fonts/SFBasteleur-Bold.ttf") format("truetype");
         font-weight: bold;
       }
 
-      /*@font-face {*/
-      /*  font-family: "Basteleur";*/
-      /*  src: local("Baseteleur-Moonlight"), url("%PUBLIC_URL%/fonts/Basteleur-Moonlight.otf") format("otf");*/
-      /*  font-weight: normal;*/
-      /*}*/
+      @font-face {
+        font-family: "Basteleur";
+        src: local("SFBaseteleur-Moonlight"), url("%PUBLIC_URL%/fonts/SFBasteleur-Moonlight.ttf") format("truetype");
+        font-weight: normal;
+      }
 
       body {
         font-family: Basteleur, serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        font-size: 16px;
         margin: 0;
       }
 

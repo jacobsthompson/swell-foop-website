@@ -10,6 +10,11 @@ export default function Header({height, minHeight, maxHeight}) {
                  height: height
             }}
         >
+            <div className="header-image" style={{
+                opacity: (height*10)/maxHeight,
+                height: height,
+                filter: `blur(${(maxHeight/height)-1}px)`
+            }}/>
             <div className="header-logo"/>
         </div>
     )
